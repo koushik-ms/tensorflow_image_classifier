@@ -1,6 +1,6 @@
 # Tensorflow Image Classifier
 
-This is the code for 'Image Classifier in TensorFlow in 5 Min on [YouTube](https://youtu.be/QfNvhPx5Px8). Use this [CodeLab](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/?utm_campaign=chrome_series_machinelearning_063016&utm_source=gdev&utm_medium=yt-desc#0) by Google as a guide. Also this [tutorial](https://www.tensorflow.org/versions/r0.9/how_tos/image_retraining/index.html) is quite helpful.
+This repo contains the code and data for image classification tutorial in tensorflow. It is a fork of [this](https://github.com/llsourcell/tensorflow_image_classifier) repo and is based on this [CodeLab](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/?utm_campaign=chrome_series_machinelearning_063016&utm_source=gdev&utm_medium=yt-desc#0) by Google as well as this [tutorial](https://www.tensorflow.org/versions/r0.9/how_tos/image_retraining/index.html) is quite helpful. For a quick video walkthrough of the process check out this information-packed [YouTube](https://youtu.be/QfNvhPx5Px8) video.
 
 ## Requirements
 
@@ -8,43 +8,40 @@ This is the code for 'Image Classifier in TensorFlow in 5 Min on [YouTube](https
 
 ## Usage 
 
-You just need to make a "classifier" directory with a directory "data" inside it with all your images
-For example
+Training data is availabe in `tf_files/data` directory. There are 2 sub-directories for 2 categories pre-populated. If you need additional categories, create additional sub-directories, like, for example
 ```
- [any_path]/my_own_classifier/
- [any_path]/my_own_classifier/data
- [any_path]/my_own_classifier/data/car
- [any_path]/my_own_classifier/data/moto
- [any_path]/my_own_classifier/data/bus
+ tf_files/data/iron_man
+ tf_files/data/wonder_woman
 ```
- and then put your image on it. 
- This "classifier" directory will have your samples but also trained classifier after execution of "train.sh". 
+and then put your images in them.
 
-## Train process
+These will be used for training. After training the `tf_files` directory will have the classifier.
+
+## Training process
  
 Just type
 ```
- ./train.sh [any_path]/my_own_classifier
+ bash ./train.sh $PWD/tf_files
 ``` 
-And it will do anything for you !
+And it will do everything for you !
 
-## Guess process
+## Testing the classifier
 
 Just type for a single guess
 ```
- ./guess.sh [any_path]/my_own_classifier /yourfile.jpg
+ bash ./guess.sh $PWD/tf_files $PWD/test_data/images00.jpg 
 ```
 
 To guess an entire directory
 ```
-./guessDir.sh [any_path]/classifier [any_path]/srcDir [any_path]/destDir
+bash ./guessDir.sh $PWD/tf_files $PWD/test_data $PWD/classified
 ```
-
+Ps. Make sure the directory $PWD/classified exists. It can be empty.
 ## Example of result
 ```
-# ./guess.sh /synced/tensor-lib/moto-classifier/ /synced/imagesToTest/moto21.jpg
-moto (score = 0.88331)
-car (score = 0.11669)
+$ bash guess.sh $PWD/tf_files $PWD/test_data/images00.jpg 
+elsa (score = 0.99636)
+darth vader (score = 0.00364)
 ```
 
 Use an absolute file path for classifier and images because the script dos not support relative path (volume mounting)
@@ -55,7 +52,7 @@ Make your own classifier for scientists, then post a clone of this repo with you
 
 # Credits
 
-Credit goes to [Xblaster](https://github.com/xblaster) for the majority of this code. I've merely created a wrapper. 
+Credit goes to [Xblaster](https://github.com/xblaster) & [@sirajology](https://github.com/llsourcell) for the majority of this code. I've merely customized it for the training data. 
 
 
 
